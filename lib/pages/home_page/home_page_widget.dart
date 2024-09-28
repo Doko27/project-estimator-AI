@@ -41,22 +41,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: const Color(0xFFD1256C),
+          backgroundColor: const Color(0xFF471D75),
           automaticallyImplyLeading: true,
           title: Text(
             'My Tunnel!',
             textAlign: TextAlign.center,
             style: FlutterFlowTheme.of(context).titleSmall.override(
-              fontFamily: 'Inter Tight',
-              letterSpacing: 0.0,
-              shadows: [
-                Shadow(
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  offset: const Offset(2.0, 2.0),
-                  blurRadius: 2.0,
-                )
-              ],
-            ),
+                  fontFamily: 'Inter Tight',
+                  fontSize: 20.0,
+                  letterSpacing: 0.0,
+                ),
           ),
           actions: const [],
           centerTitle: true,
@@ -73,23 +67,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                   child: Text(
-                    'Please provide me with a prompt that will help me estimate the cost, time, and resources required for this project, given the following context:',
+                    'Please provide a detailed prompt describing the application you want to develop. This will help us estimate the effort required for each role involved.',
                     textAlign: TextAlign.justify,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
+                          color: Colors.black,
                           letterSpacing: 0.0,
-                        ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
-                  child: Text(
-                    '1. Project Overview: [Brief overview of the project, e.g., developing an online catalog for a fashion retailer]\n2. Required Roles: [List of roles, e.g., UI/UX designers, frontend and backend developers, QA engineers]\n3. Budget: [Estimated budget or budget range]',
-                    textAlign: TextAlign.justify,
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w600,
                         ),
                   ),
                 ),
@@ -107,17 +90,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         labelStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(
                                   fontFamily: 'Inter',
+                                  color: const Color(0xFF92989D),
                                   letterSpacing: 0.0,
                                 ),
                         hintText: 'Enter a prompt here',
                         hintStyle:
                             FlutterFlowTheme.of(context).labelMedium.override(
                                   fontFamily: 'Inter',
+                                  color: const Color(0xFF8C949C),
                                   letterSpacing: 0.0,
                                 ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: FlutterFlowTheme.of(context).alternate,
+                          borderSide: const BorderSide(
+                            color: Color(0xFFC1C1C1),
                             width: 1.0,
                           ),
                           borderRadius: BorderRadius.circular(8.0),
@@ -144,11 +129,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                         filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
+                        fillColor: Colors.white,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
+                            color: Colors.black,
                             letterSpacing: 0.0,
                           ),
                       maxLines: 10,
@@ -160,7 +145,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
-                    context.pushNamed('ListPage');
+                    context.pushNamed(
+                      'ListPage',
+                      queryParameters: {
+                        'message': serializeParam(
+                          _model.textController.text,
+                          ParamType.String,
+                        ),
+                      }.withoutNulls,
+                    );
                   },
                   text: 'Estimate Now',
                   options: FFButtonOptions(
@@ -176,9 +169,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       color: Colors.white,
                       letterSpacing: 0.0,
                       shadows: [
-                        Shadow(
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          offset: const Offset(2.0, 2.0),
+                        const Shadow(
+                          color: Color(0xFF6C7880),
+                          offset: Offset(2.0, 2.0),
                           blurRadius: 2.0,
                         )
                       ],

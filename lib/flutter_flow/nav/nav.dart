@@ -44,7 +44,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'ListPage',
           path: '/listPage',
-          builder: (context, params) => const ListPageWidget(),
+          builder: (context, params) => ListPageWidget(
+            message: params.getParam(
+              'message',
+              ParamType.String,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

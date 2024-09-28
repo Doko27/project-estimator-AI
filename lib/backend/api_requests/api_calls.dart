@@ -1,20 +1,27 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
+import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
-class AnalyzeBillCall {
-  static Future<ApiCallResponse> call() async {
+class ProjectEstimatorCall {
+  static Future<ApiCallResponse> call({
+    String? message =
+        'We want to create a fashion catalog application that can be accessed on mobile devices, web browsers, and through a content management system. This application will be integrated with an external API to enhance its functionality.',
+  }) async {
     return ApiManager.instance.makeApiCall(
-      callName: 'Analyze Bill',
-      apiUrl: 'https://n8n.gits.id/webhook/gits-aniversary/analyze-bill',
+      callName: 'Project Estimator',
+      apiUrl:
+          'https://project-estimator2-770556709241.asia-southeast2.run.app/estimator',
       callType: ApiCallType.POST,
       headers: {},
-      params: {},
+      params: {
+        'message': message,
+      },
       bodyType: BodyType.MULTIPART,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -24,6 +31,12 @@ class AnalyzeBillCall {
       alwaysAllowBody: false,
     );
   }
+
+  static List? data(dynamic response) => getJsonField(
+        response,
+        r'''$.data''',
+        true,
+      ) as List?;
 }
 
 class ApiPagingParams {
